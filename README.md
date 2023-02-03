@@ -7,7 +7,6 @@ Python version: **3.10**
 
 ### Main function:
     def main():
-
         server = WaterMelonServer()
 
         server.run()
@@ -16,6 +15,10 @@ Python version: **3.10**
     @register_path('forum/page/<userid:int>/<article_name:str>')
     def forum(request, userid, article_name):
         return HtmlResponse(f'<h1>{article_name}</h1><p>id: {userid}</p>')
+
+#### Currently available types:
+1. int **(\d+ in regex)**
+2. str **(\w+ in regex)**
 
 ### Storage use:
     @register_path('/')
@@ -27,6 +30,10 @@ Python version: **3.10**
         else:
             return HtmlResponse("I don't know your name")
 
+#### Methods:
+1. **contains_data(key)** - check if data with this key exists
+2. **get_data(key)** - get players data
+3. **set_data(key, value)** - set players data
 
 ## Functionality:
 
