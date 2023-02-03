@@ -9,9 +9,7 @@ class WaterMelonHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         address = self.client_address[0]
 
-        # Edit this part
-        from core.WaterMelonServerSingleton import WaterMelonServerSingleton
-        user = WaterMelonServerSingleton.instance().get_users_storage().get_user(address)
+        user = WaterMelonConfiguration.users_storage.get_user(address)
 
         request = Request(url=self.path, address=address, method=self.command, user=user)
 

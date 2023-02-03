@@ -1,4 +1,4 @@
-from core.WaterMelonServerSingleton import WaterMelonServerSingleton
+from core.WaterMelonServer import WaterMelonServer
 from core.response.HtmlResponse import HtmlResponse
 from path.PathsHandler import register_path
 
@@ -28,7 +28,7 @@ def forum(request, userid, article_name):
 
 
 def main():
-    server = WaterMelonServerSingleton.instance()
+    server = WaterMelonServer()
     server.run()
 
 
