@@ -2,7 +2,6 @@ from http.server import HTTPServer
 
 from core.WaterMelonConfiguration import WaterMelonConfiguration
 from core.WaterMelonHandler import WaterMelonHandler
-from core.session.VirtualUsersStorage import VirtualUsersStorage
 
 
 class WaterMelonServer(HTTPServer):

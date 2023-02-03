@@ -1,5 +1,5 @@
-from core.session.User import User
-from core.session.UsersStorage import UsersStorage
+from storage.User import User
+from storage.UsersStorage import UsersStorage
 
 
 class VirtualUsersStorage(UsersStorage):

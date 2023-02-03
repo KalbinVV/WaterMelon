@@ -1,11 +1,10 @@
-from functools import wraps
 from functools import lru_cache
 
 from path.Path import Path
 
 
 class PathsHandler:
-    paths: Path = []
+    paths: list = []
 
     @classmethod
     def register_path(cls, pattern, caller):

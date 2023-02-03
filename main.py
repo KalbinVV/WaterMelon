@@ -4,13 +4,13 @@ from path.PathsHandler import register_path
 
 
 @register_path('')
-def index(request):
+def index_page(request):
     user = request.user
 
-    if not user.contains_data('name'):
-        return HtmlResponse('<h1>Hello unknown!</h1>')
+    if user.contains_data('name'):
+        return HtmlResponse(f"Hello, {user.get_data('name')}")
     else:
-        return HtmlResponse(f'<h1>Hello, {user.get_data("name")}!</h1>')
+        return HtmlResponse("I don't know your name")
 
 
 @register_path('/user/<name:str>')

@@ -1,5 +1,5 @@
 from core.response.NotFoundResponse import NotFoundResponse
-from core.session.VirtualUsersStorage import VirtualUsersStorage
+from storage.VirtualUsersStorage import VirtualUsersStorage
 
 
 class WaterMelonConfiguration:

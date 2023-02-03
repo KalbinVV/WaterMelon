@@ -9,7 +9,8 @@ class WaterMelonHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         address = self.client_address[0]
 
-        user = WaterMelonConfiguration.users_storage.get_user(address)
+        users_storage = WaterMelonConfiguration.users_storage
+        user = users_storage.get_user(address)
 
         request = Request(url=self.path, address=address, method=self.command, user=user)
 
@@ -21,6 +22,8 @@ class WaterMelonHandler(BaseHTTPRequestHandler):
             response = path.run_caller(request)
 
         self.send_response(response.status)
+
         self.send_header("Content-type", response.content_type)
         self.end_headers()
+
         self.wfile.write(bytes(response.content, "utf-8"))
