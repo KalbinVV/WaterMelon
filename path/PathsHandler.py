@@ -1,5 +1,6 @@
 from functools import lru_cache
 
+from core.WaterMelonConfiguration import WaterMelonConfiguration
 from path.Path import Path
 
 
@@ -8,7 +9,15 @@ class PathsHandler:
 
     @classmethod
     def register_path(cls, pattern, caller):
-        cls.paths.append(Path(pattern, caller))
+        path = Path(pattern, caller)
+
+        if WaterMelonConfiguration.show_paths_registering:
+            print(f'Path registered: {pattern if len(pattern) else "/"}')
+
+        if WaterMelonConfiguration.show_regexes_for_paths:
+            print(f'Regex for {pattern if len(pattern) else "/"}: {path.pattern}')
+
+        cls.paths.append(path)
 
     @classmethod
     @lru_cache
@@ -24,7 +33,6 @@ def register_path(pattern):
     def wrapped_decorator():
         def decorator(caller):
             PathsHandler.register_path(pattern, caller)
-            print(f'Path registered: {pattern}')
 
         return decorator
 

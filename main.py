@@ -3,7 +3,7 @@ from core.response.HtmlResponse import HtmlResponse
 from path.PathsHandler import register_path
 
 
-@register_path('')
+@register_path('/')
 def index_page(request):
     user = request.user
 
@@ -13,7 +13,7 @@ def index_page(request):
         return HtmlResponse("I don't know your name")
 
 
-@register_path('/user/<name:str>')
+@register_path('user/<name:str>')
 def user_page(request, name):
     user = request.user
 

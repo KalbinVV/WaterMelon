@@ -1,3 +1,3 @@
+# Interface of users storage
 class UsersStorage:
-    def get_user(self, address):
-        raise ValueError("Can't run abstract method!")
+    pass

@@ -7,3 +7,5 @@ class WaterMelonConfiguration:
     server_port = 8080
     error_404_response = NotFoundResponse('<hr><h1 style="text-align: center">Error: 404</h1><hr>')
     users_storage = VirtualUsersStorage()
+    show_paths_registering = True
+    show_regexes_for_paths = False
