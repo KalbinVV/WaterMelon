@@ -7,7 +7,13 @@ from path.PathsHandler import PathsHandler
 
 class WaterMelonHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        request = Request(url=self.path, method=self.command)
+        address = self.client_address[0]
+
+        # Edit this part
+        from core.WaterMelonServerSingleton import WaterMelonServerSingleton
+        user = WaterMelonServerSingleton.instance().get_users_storage().get_user(address)
+
+        request = Request(url=self.path, address=address, method=self.command, user=user)
 
         path = PathsHandler.match_url(request.url)
 

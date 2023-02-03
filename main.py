@@ -1,15 +1,24 @@
+from core.WaterMelonServerSingleton import WaterMelonServerSingleton
 from core.response.HtmlResponse import HtmlResponse
-from core.WaterMelonServer import WaterMelonServer
 from path.PathsHandler import register_path
 
 
 @register_path('')
 def index(request):
-    return HtmlResponse('<h1>Hello, world!</h1>')
+    user = request.user
+
+    if not user.contains_data('name'):
+        return HtmlResponse('<h1>Hello unknown!</h1>')
+    else:
+        return HtmlResponse(f'<h1>Hello, {user.get_data("name")}!</h1>')
 
 
 @register_path('/user/<name:str>')
 def user_page(request, name):
+    user = request.user
+
+    user.set_data('name', name)
+
     return HtmlResponse(f'<h4>Hello, {name}!<h4>')
 
 
@@ -19,7 +28,7 @@ def forum(request, userid, article_name):
 
 
 def main():
-    server = WaterMelonServer()
+    server = WaterMelonServerSingleton.instance()
     server.run()
 
 
