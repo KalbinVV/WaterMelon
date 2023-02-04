@@ -12,7 +12,7 @@ def index_page(request):
     if user.contains_data('name'):
         return HtmlResponse(f"Hello, {user.get_data('name')}")
     else:
-        return HtmlResponse("I don't know your name")
+        return HtmlResponse(f"I don't know you, {user.get_address()}")
 
 
 @register_path('forum/<article:str>', 'GET')

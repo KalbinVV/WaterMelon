@@ -31,17 +31,15 @@ class WaterMelonHandler(BaseHTTPRequestHandler):
         request = Request(url=request_handler.path, address=address, method=request_handler.command, user=user,
                           get_dictionary=get_dictionary, post_dictionary=post_dictionary)
 
-        path = PathsHandler.match_url(request.url, request.method)
+        path, implemented = PathsHandler.match_url(request.url, request.method)
 
-        if isinstance(path, tuple):
-            implemented = path[1]
-
-            if not implemented:
-                response = WaterMelonConfiguration.error_501_response
-            else:
-                response = WaterMelonConfiguration.error_404_response
+        if path is None:
+            response = WaterMelonConfiguration.error_404_response
         else:
-            response = path.run_caller(request)
+            if implemented:
+                response = path.run_caller(request)
+            else:
+                response = WaterMelonConfiguration.error_501_response
 
         request_handler.send_response(response.status)
 

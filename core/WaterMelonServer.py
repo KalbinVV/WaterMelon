@@ -1,3 +1,4 @@
+import threading
 from http.server import HTTPServer
 
 from core.WaterMelonConfiguration import WaterMelonConfiguration
@@ -14,6 +15,12 @@ class WaterMelonServer(HTTPServer):
     def run(self):
         print(f'Server started: {self.server_name}:{self.server_port}')
 
+        users_storage = WaterMelonConfiguration.users_storage
+
+        data_cleaner_thread = threading.Thread(target=users_storage.data_cleaner)
+
+        data_cleaner_thread.start()
+
         try:
             self.serve_forever()
         except KeyboardInterrupt:
@@ -21,3 +28,7 @@ class WaterMelonServer(HTTPServer):
 
         self.server_close()
         print('Server closed!')
+
+        users_storage.disable_data_cleaner()
+
+        data_cleaner_thread.join()
