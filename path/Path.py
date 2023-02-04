@@ -5,9 +5,10 @@ from core.response.Response import Response
 
 
 class Path:
-    def __init__(self, pattern: str, caller):
+    def __init__(self, pattern, caller, method):
         self.pattern = self.make_regex_from_pattern(pattern)
         self.caller = caller
+        self.method = method
 
     @classmethod
     def get_regex_group_from_field_type(cls, field_type: str) -> str | None:
