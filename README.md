@@ -33,7 +33,7 @@ Python version: **3.10**
 1. int **(\d+ in regex)**
 2. str **(\w+ in regex)**
 
-### Storage use:
+### Storage use (Sessions):
     @register_path('/')
     def index_page(request):
         user = request.user
@@ -55,6 +55,5 @@ Python version: **3.10**
 3. Configuration file
 
 ## Todo:
-1. Sessions
-2. Cookies
-3. Docs
+1. Cookies
+2. Docs
