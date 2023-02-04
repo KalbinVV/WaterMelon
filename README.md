@@ -16,6 +16,19 @@ Python version: **3.10**
     def forum(request, userid, article_name):
         return HtmlResponse(f'<h1>{article_name}</h1><p>id: {userid}</p>')
 
+**if you want implement only one method:**
+    
+    @register_path('api/set_name/', 'POST')
+    def set_user_name(request):
+        user = request.user
+
+        if 'name' not in request.post_dictionary:
+            return HtmlResponse(json.dumps({'status': False, 'reason': 'Invalid args!'}))
+
+        user.set_data('name', request.post_dictionary['name'])
+
+        return HtmlResponse(json.dumps({'status': True}))``
+
 #### Currently available types:
 1. int **(\d+ in regex)**
 2. str **(\w+ in regex)**
@@ -44,5 +57,4 @@ Python version: **3.10**
 ## Todo:
 1. Sessions
 2. Cookies
-3. Post, get processing
-4. Docs
+3. Docs

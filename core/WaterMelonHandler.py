@@ -33,8 +33,13 @@ class WaterMelonHandler(BaseHTTPRequestHandler):
 
         path = PathsHandler.match_url(request.url, request.method)
 
-        if path is None:
-            response = WaterMelonConfiguration.error_404_response
+        if isinstance(path, tuple):
+            implemented = path[1]
+
+            if not implemented:
+                response = WaterMelonConfiguration.error_501_response
+            else:
+                response = WaterMelonConfiguration.error_404_response
         else:
             response = path.run_caller(request)
 

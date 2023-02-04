@@ -21,13 +21,17 @@ class PathsHandler:
 
     @classmethod
     @lru_cache
-    def match_url(cls, url: str, method: str) -> Path | None:
+    def match_url(cls, url: str, method: str) -> Path | tuple:
+        implemented = True
+
         for p in cls.paths:
             if p.is_url_match(url):
                 if p.method is None or p.method == method:
                     return p
+                else:
+                    implemented = False
 
-        return None
+        return None, implemented
 
 
 def register_path(pattern, method=None):
