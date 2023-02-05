@@ -1,4 +1,5 @@
 import re
+from functools import lru_cache
 
 from core.Request import Request
 from core.response.Response import Response
@@ -41,9 +42,11 @@ class Path:
 
         return re.compile(f'{final_pattern}/?$')
 
+    @lru_cache(maxsize=1000)
     def is_url_match(self, url: str) -> bool:
         return self.pattern.match(url) is not None
 
+    @lru_cache(maxsize=1000)
     def parse_fields_from_url(self, url: str) -> dict:
         matches = self.pattern.match(url)
 

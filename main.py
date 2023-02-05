@@ -2,6 +2,7 @@ import json
 
 from core.WaterMelonServer import WaterMelonServer
 from core.response.HtmlResponse import HtmlResponse
+from core.response.JsonResponse import JsonResponse
 from path.PathsHandler import register_path
 
 
@@ -25,11 +26,11 @@ def set_user_name(request):
     user = request.user
 
     if 'name' not in request.post_dictionary:
-        return HtmlResponse(json.dumps({'status': False, 'reason': 'Invalid args!'}))
+        return JsonResponse({'status': False, 'reason': 'invalid args!'})
 
     user.set_data('name', request.post_dictionary['name'])
 
-    return HtmlResponse(json.dumps({'status': True}))
+    return JsonResponse({'status': True})
 
 
 def main():

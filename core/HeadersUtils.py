@@ -1,9 +1,11 @@
 import re
+from functools import lru_cache
 from http.server import BaseHTTPRequestHandler
 
 
 class HeadersUtils:
     @staticmethod
+    @lru_cache(maxsize=1000)
     def parse_header_content(request_handler: BaseHTTPRequestHandler) -> dict:
         content_length = int(request_handler.headers.get('content-length', 0))
 

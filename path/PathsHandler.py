@@ -20,7 +20,7 @@ class PathsHandler:
         cls.paths.append(path)
 
     @classmethod
-    @lru_cache
+    @lru_cache(maxsize=1000)
     def match_url(cls, url: str, method: str) -> tuple:
         for p in cls.paths:
             if p.is_url_match(url):
@@ -36,6 +36,7 @@ def register_path(pattern, method=None):
     def wrapped_decorator():
         def decorator(caller):
             PathsHandler.register_path(pattern, caller, method)
+            return caller
 
         return decorator
 
