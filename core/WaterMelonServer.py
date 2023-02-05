@@ -27,8 +27,11 @@ class WaterMelonServer(HTTPServer):
             print('Closing server...')
 
         self.server_close()
-        print('Server closed!')
 
-        users_storage.disable_data_cleaner()
+        if users_storage.is_data_cleaner_enabled():
+            users_storage.disable_data_cleaner()
+            print('Data cleaner stop working, it may spend some time...')
 
         data_cleaner_thread.join()
+
+        print('Server closed!')

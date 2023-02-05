@@ -21,12 +21,13 @@ class VirtualUsersStorage(UsersStorage):
 
         return user
 
+    def is_data_cleaner_enabled(self):
+        return self.__data_cleaner_enabled
+
     def disable_data_cleaner(self):
         self.__data_cleaner_enabled = False
 
     def data_cleaner(self):
-        print('Data cleaner enabled!')
-
         while self.__data_cleaner_enabled:
             users_to_remove = []
 
@@ -38,5 +39,3 @@ class VirtualUsersStorage(UsersStorage):
                 del self.__users[user.get_address()]
 
             sleep(self.__data_cleaner_frequency_time)
-
-        print('Data cleaner stopped!')

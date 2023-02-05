@@ -1,12 +1,19 @@
-import json
-
+from core.Middleware import middleware
 from core.WaterMelonServer import WaterMelonServer
 from core.response.HtmlResponse import HtmlResponse
 from core.response.JsonResponse import JsonResponse
 from path.PathsHandler import register_path
 
 
+def role_middleware(request):
+    user = request.user
+
+    if not user.contains_data('role'):
+        return HtmlResponse('<h1>You are not authorised!</h1>')
+
+
 @register_path('/')
+@middleware(target=role_middleware)
 def index_page(request):
     user = request.user
 
@@ -29,6 +36,18 @@ def set_user_name(request):
         return JsonResponse({'status': False, 'reason': 'invalid args!'})
 
     user.set_data('name', request.post_dictionary['name'])
+
+    return JsonResponse({'status': True})
+
+
+@register_path('api/set_role/', 'POST')
+def set_user_role(request):
+    if 'role' not in request.post_dictionary:
+        return JsonResponse({'status': False, 'reason': 'invalid args'})
+
+    role = request.post_dictionary['role']
+    user = request.user
+    user.set_data('role', role)
 
     return JsonResponse({'status': True})
 
