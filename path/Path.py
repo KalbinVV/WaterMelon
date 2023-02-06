@@ -6,7 +6,7 @@ from core.response.Response import Response
 
 
 class Path:
-    def __init__(self, pattern, caller, method):
+    def __init__(self, pattern: str, caller, method: str):
         self.pattern = self.make_regex_from_pattern(pattern)
         self.caller = caller
         self.method = method

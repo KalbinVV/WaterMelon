@@ -3,7 +3,7 @@ from typing import Any
 
 
 class User:
-    def __init__(self, address: str, data=None, data_expire_time=300):
+    def __init__(self, address: str, data=None, data_expire_time: int = 300):
         if data is None:
             data = {}
 

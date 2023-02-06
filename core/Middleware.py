@@ -1,6 +1,3 @@
-from functools import wraps
-
-
 def middleware(target):
 
     def wrapped_decorator(caller):
@@ -15,4 +12,3 @@ def middleware(target):
         return wrapper
 
     return wrapped_decorator
-

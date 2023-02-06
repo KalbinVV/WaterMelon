@@ -12,7 +12,7 @@ class WaterMelonServer(HTTPServer):
 
         super().__init__((server_name, server_port), WaterMelonHandler)
 
-    def run(self):
+    def run(self) -> None:
         print(f'Server started: {self.server_name}:{self.server_port}')
 
         users_storage = WaterMelonConfiguration.users_storage
