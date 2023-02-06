@@ -16,7 +16,8 @@ class WaterMelonHandler(BaseHTTPRequestHandler):
         self.process_request(self, post_dictionary=post_dictionary)
 
     @staticmethod
-    def process_request(request_handler: BaseHTTPRequestHandler, get_dictionary=None, post_dictionary=None) -> None:
+    def process_request(request_handler: BaseHTTPRequestHandler, get_dictionary=None, post_dictionary=None) \
+            -> None:
         if post_dictionary is None:
             post_dictionary = {}
 

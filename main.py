@@ -1,7 +1,9 @@
 from core.Middleware import middleware
+from core.Template import Template
 from core.WaterMelonServer import WaterMelonServer
 from core.response.HtmlResponse import HtmlResponse
 from core.response.JsonResponse import JsonResponse
+from core.response.TemplateResponse import TemplateResponse
 from path.PathsHandler import register_path
 
 
@@ -38,6 +40,15 @@ def set_user_name(request):
     user.set_data('name', request.post_dictionary['name'])
 
     return JsonResponse({'status': True})
+
+
+@register_path('test_template/')
+def test_template(request):
+    user = request.user
+
+    name = user.get_data('name', 'default name')
+
+    return TemplateResponse(Template('index.html', name=name))
 
 
 @register_path('api/set_role/', 'POST')

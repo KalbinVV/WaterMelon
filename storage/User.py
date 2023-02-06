@@ -12,8 +12,12 @@ class User:
         self.__last_data_timestamp = datetime.now()
         self.__data_expire_time = data_expire_time
 
-    def get_data(self, key: str) -> Any:
+    def get_data(self, key: str, default=None) -> Any:
         self.__last_data_timestamp = datetime.now()
+
+        if key not in self.__data:
+            return default
+
         return self.__data[key]
 
     def contains_data(self, key: str) -> bool:
